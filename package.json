@@ -1,0 +1,31 @@
+{
+  "name": "@cgvweb/payload-live-preview-vue",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "Christian Gil Villaseñor",
+    "email": "christian@chrisgvdev.com",
+    "url": "https://chrisgvdev.com"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/*.ts --format cjs,esm --dts",
+    "release": "pnpm build && pnpm version patch && pnpm publish --access=public",
+    "lint": "tsc"
+  },
+  "dependencies": {
+    "@payloadcms/live-preview": "^0.2.2"
+  },
+  "devDependencies": {
+    "@payloadcms/eslint-config": "^1.1.1",
+    "@types/node": "^18.15.11",
+    "payload": "^2.9.0",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  }
+}
