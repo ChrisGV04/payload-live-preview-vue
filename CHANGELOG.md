@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/ChrisGV04/payload-live-preview-vue/compare/0.1.1...0.1.2) (2024-07-30)
+
+
+### Bug Fixes
+
+* Package exports ([7c508b1](https://github.com/ChrisGV04/payload-live-preview-vue/commit/7c508b13627ea0d9c17c4e7a4da17fe62caff31f))
+
 ## 0.1.1 (2024-07-30)
 
 
