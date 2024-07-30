@@ -13,13 +13,13 @@
     "access": "public"
   },
   "sideEffects": false,
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.cts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.mjs",
+      "require": "./dist/index.js",
       "import": "./dist/index.js"
     }
   },
