@@ -1,6 +1,9 @@
-import { ready, subscribe, unsubscribe } from '@payloadcms/live-preview';
-import { type Ref, ref, watchEffect } from 'vue';
+import type { Ref } from 'vue';
 
+import { ready, subscribe, unsubscribe } from '@payloadcms/live-preview';
+import { onMounted, onUnmounted, ref } from 'vue';
+
+/** Vue composable to implement Payload CMS Live Preview. */
 export const useLivePreview = <T>(props: {
   apiRoute?: string;
   depth?: number;
@@ -12,13 +15,15 @@ export const useLivePreview = <T>(props: {
   const isLoading = ref(true);
   const hasSentReadyMessage = ref(false);
 
-  const onChange = (mergedData: T) => {
+  function onChange(mergedData: T) {
     data.value = mergedData;
     isLoading.value = false;
-  };
+  }
 
-  watchEffect((onCleanup) => {
-    const subscription = subscribe({
+  let subscription: (event: MessageEvent) => void;
+
+  onMounted(() => {
+    subscription = subscribe({
       apiRoute,
       callback: onChange,
       depth,
@@ -28,13 +33,21 @@ export const useLivePreview = <T>(props: {
 
     if (!hasSentReadyMessage.value) {
       hasSentReadyMessage.value = true;
-      ready({ serverURL });
-    }
 
-    onCleanup(() => {
-      unsubscribe(subscription);
-    });
+      ready({
+        serverURL,
+      });
+    }
   });
 
-  return { data, isLoading };
+  onUnmounted(() => {
+    if (subscription) {
+      unsubscribe(subscription);
+    }
+  });
+
+  return {
+    data,
+    isLoading,
+  };
 };

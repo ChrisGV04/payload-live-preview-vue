@@ -1,31 +1,51 @@
 {
   "name": "@cgvweb/payload-live-preview-vue",
   "version": "0.1.0",
-  "license": "MIT",
+  "repository": "https://github.com/ChrisGV04/payload-live-preview-vue",
   "author": {
     "name": "Christian Gil Villaseñor",
     "email": "christian@chrisgvdev.com",
-    "url": "https://chrisgvdev.com"
+    "url": "https://cgvweb.com"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.mjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsup src/*.ts --format cjs,esm --dts",
-    "release": "pnpm build && pnpm version patch && pnpm publish --access=public",
-    "lint": "tsc"
+    "build": "rimraf dist && tsup src/index.ts --format esm --dts",
+    "lint": "biome lint ./src",
+    "release": "release-it && npm run build && npm publish"
   },
   "dependencies": {
     "@payloadcms/live-preview": "^0.2.2"
   },
   "devDependencies": {
-    "@payloadcms/eslint-config": "^1.1.1",
-    "@types/node": "^18.15.11",
-    "payload": "^2.9.0",
-    "tsup": "^6.7.0",
-    "typescript": "^5.0.4"
+    "@biomejs/biome": "1.8.3",
+    "@release-it/conventional-changelog": "8.0.1",
+    "@types/node": "22.0.0",
+    "@types/slug": "5.0.8",
+    "changelogen": "0.5.5",
+    "release-it": "17.6.0",
+    "rimraf": "6.0.1",
+    "tsup": "8.2.3",
+    "typescript": "5.5.4"
   },
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": ">=3.0"
   }
 }
