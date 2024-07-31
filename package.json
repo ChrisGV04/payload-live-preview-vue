@@ -13,21 +13,19 @@
     "access": "public"
   },
   "sideEffects": false,
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "import": "./dist/index.js"
     }
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
-    "build": "rimraf dist && tsup src/index.ts --format esm --dts",
+    "build": "rimraf dist && tsup src/index.ts --format cjs,esm --dts",
     "lint": "biome lint ./src",
     "release": "release-it && npm run build && npm publish"
   },
